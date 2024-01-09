@@ -21,7 +21,7 @@ paths:
         content:
           application/json:
             example:
-              message: "This is a sample messageaaaaㄴaa"
+              message: "This is a sample messagㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴeaaaaㄴaa"
       responses:
         '200':
           description: A successful response

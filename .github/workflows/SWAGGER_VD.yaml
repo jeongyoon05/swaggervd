@@ -18,4 +18,4 @@ jobs:
         uses: char0n/swagger-editor-validate@v1
         with:
           swagger-editor-url: http://localhost/
-          definition-file: definitions/**.yaml
+          definition-file: /path/to/directory/**/*.yaml

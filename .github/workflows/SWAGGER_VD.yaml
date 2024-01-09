@@ -2,8 +2,6 @@ name: Swagger Validation
 
 on:
   push:
-    branches-ignore:
-      - main
     paths:
       - 'swagger.yaml'
 

@@ -13,18 +13,11 @@ jobs:
           - 80:8080
 
     steps:
-      - name: Get OpenAPI files
-        id: getfiles
-        uses: actions/checkout@v2
-        run: |
-          echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
-          find lib -type f -iname "*.yaml" >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-          
-          FILES="$(find lib -type f -iname "*openapi.yaml")"
-          echo "::set-output name=file_list::$FILES"
-      - name: swagger-validator
-        uses: mbowman100/swagger-validator-action@master
-        if: env.FILE_COUNT != '0'
+      - uses: actions/checkout@v2
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1
         with:
-          files: ${{ env.FILE_LIST }}
+          swagger-editor-url: http://localhost/
+          definition-file:
+            - swagger.yaml
+            - hello.yaml

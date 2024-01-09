@@ -1,0 +1,31 @@
+openapi: 3.0.0
+info:
+  title: Simple API
+  version: 1.0.0
+paths:
+  /greet:
+    get:
+      summary: Retrieve a friendly greeting
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              example:
+                message: Hello, World!
+  /echo:
+    post:
+      summary: Echo the provided message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              message: "This is a sample message"
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              example:
+                echoedMessage: "This is a sample message"

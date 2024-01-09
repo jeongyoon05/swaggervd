@@ -13,9 +13,9 @@ jobs:
           - 80:8080
 
     steps:
+      - uses: actions/checkout@v2
       - name: Get YAML files
-        id: getfiles
-        uses: actions/checkout@v2
+        uses: char0n/swagger-editor-validate@v1
         run: |
           echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
           find . -type f -iname "*.yaml" >> $GITHUB_ENV

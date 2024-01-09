@@ -1,0 +1,19 @@
+name: Swagger Validation
+
+on:
+  pull_request:
+    paths:
+      - 'swagger.yaml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Validate Swagger
+      uses: SpringerPE/swagger-action@v2
+      with:
+        file: 'swagger.yaml' 

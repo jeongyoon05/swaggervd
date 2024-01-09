@@ -1,7 +1,9 @@
 name: Swagger Validation
 
 on:
-  pull_request:
+  push:
+    branches-ignore:
+      - main
     paths:
       - 'swagger.yaml'
 

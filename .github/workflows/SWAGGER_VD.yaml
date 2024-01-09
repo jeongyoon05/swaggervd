@@ -1,19 +1,21 @@
 name: Swagger Validation
 
-on:
-  push:
-    paths:
-      - 'swagger.yaml'
+on: [push]
 
 jobs:
-  validate:
+  test_swagger_editor_validator_service:
     runs-on: ubuntu-latest
+    name: Swagger Editor Validator Service
+    services:
+      swagger-editor:
+        image: swaggerapi/swagger-editor
+        ports:
+          - 80:8080
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Validate Swagger
-      uses: SpringerPE/swagger-action@v2
-      with:
-        file: 'swagger.yaml' 
+      - uses: actions/checkout@v2
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1
+        with:
+          swagger-editor-url: http://localhost/
+          definition-file: swagger.yaml

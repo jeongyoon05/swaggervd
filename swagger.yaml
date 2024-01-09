@@ -1,61 +1,31 @@
 openapi: 3.0.0
 info:
-  title: Pet Store API
+  title: Simple API
   version: 1.0.0
 paths:
-  /pets:
+  /greet:
     get:
-      summary: Get a list of pets
+      summary: Retrieve a friendly greeting
       responses:
         '200':
-          description: A list of pets
+          description: A successful response
           content:
             application/json:
               example:
-                - id: 1
-                  name: "Dog"
-                - id: 2
-                  name: "Cat"
+                message: Hello, World!
+  /echo:
     post:
-      summary: Add a new pet
+      summary: Echo the provided message
       requestBody:
         required: true
         content:
           application/json:
             example:
-              name: "Bird"
-      responses:
-        '201':
-          description: Pet added successfully
-  /pets/{petId}:
-    get:
-      summary: Get details of a specific pet
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          description: ID of the pet
-          schema:
-            type: integer
+              message: "This is a sample message"
       responses:
         '200':
-          description: Details of the pet
+          description: A successful response
           content:
             application/json:
               example:
-                id: 1
-                name: "Dog"
-    put:
-      summary: Update details of a specific pet
-      parameters:
-        - name: petId
-          in: path
-          required: true
-          description: ID of the pet
-          schema:
-            type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            exam
+                echoedMessage: "This is a sample message"

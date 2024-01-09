@@ -16,8 +16,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Get YAML files
+      - name: valid
         uses: char0n/swagger-editor-validate@v1
+
+      - name: Get YAML files
         run: |
           echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
           find . -type f -iname "*.yaml" >> $GITHUB_ENV

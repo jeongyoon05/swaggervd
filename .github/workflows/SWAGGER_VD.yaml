@@ -1,6 +1,6 @@
 name: Swagger Validation
 
-on: [push]
+on: [ push ]
 
 jobs:
   test_swagger_editor_validator_service:
@@ -13,9 +13,19 @@ jobs:
           - 80:8080
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Validate OpenAPI definition
-        uses: char0n/swagger-editor-validate@v1
+      - name: Get YAML files
+        id: getfiles
+        uses: actions/checkout@v2
+        run: |
+          echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
+          find . -type f -iname "*.yaml" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+          
+          FILES="$(find . -type f -iname "*.yaml")"
+          echo "::set-output name=file_list::$FILES"
+
+      - name: yaml-validator
+        uses: mbowman100/yaml-validator-action@master
+        if: env.FILE_COUNT != '0'
         with:
-          swagger-editor-url: http://localhost/
-          definition-file: swagger.yaml
+          files: ${{ env.FILE_LIST }}

@@ -4,6 +4,7 @@ info:
   description: "A simple API for demonstration purposes"
   version: "1.0.0"
 
+
 paths:
   /hello:
     get:

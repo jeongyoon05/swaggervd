@@ -1,43 +1,31 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
-  title: "Sample API"
-  description: "A simple API for demonstration purposes"
-  version: "1.0.0"
-
-
+  title: Simple API
+  version: 1.0.0
 paths:
-  /hello:
+  /greet:
     get:
-      summary: "Get Hello Message"
-      description: "Returns a hello message"
+      summary: Retrieve a friendly greeting
       responses:
-        200:
-          description: "Successful response"
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
-                example: "Hello, Swagger!"
-
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              example:
+                message: Hello, World!
   /echo:
-    post summary: "Echo Message"  sasds
-      description: "Echoes the provided message"
-      parameters:
-        - in: body
-          name: message
-          description: "Message to be echoed"
-          required: true
-          schema:
-            type: object
-            properties:
-              message:
-                type: string
+    post:
+      summary: Echo the provided message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              message: "This is a sample message"
       responses:
-        200:
-          description: "Successful response"
-          schema:
-            type: object
-            properties:
-              echoedMessage:
-                type: string
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              example:
+                echoedMessage: "This is a sample message"

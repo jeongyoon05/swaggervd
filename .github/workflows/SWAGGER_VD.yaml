@@ -26,9 +26,12 @@ jobs:
           CHANGED_FILES_WITH_EXTENSIONS=$(echo "$CHANGED_FILES" | xargs -I {} basename {})
           
           echo "::set-output name=changed_files::$CHANGED_FILES_WITH_EXTENSIONS"
-
+      - name: Display Changed Files
+        run: |
+          CHANGED_FILES_WITH_EXTENSIONS="${{ steps.get_changed.outputs.changed_files_with_extensions }}"
+          echo "Changed files with extensions: $CHANGED_FILES_WITH_EXTENSIONS"
       - name: Validate OpenAPI definition
         uses: char0n/swagger-editor-validate@v1
         with:
           swagger-editor-url: http://localhost/
-          definition-file: $CHANGED_FILES_WITH_EXTENSIONS
+          definition-file: ${{ steps.get_changed.outputs.changed_files_with_extensions }}

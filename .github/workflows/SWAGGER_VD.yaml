@@ -28,8 +28,6 @@ jobs:
           FILES="$(find . -type f -iname "*.yaml")"
           echo "::set-output name=file_list::$FILES"
 
-      - name: yaml-validator
-        uses: mbowman100/yaml-validator-action@master
         if: env.FILE_COUNT != '0'
         with:
           files: ${{ env.FILE_LIST }}

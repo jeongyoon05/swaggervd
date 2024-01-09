@@ -12,10 +12,23 @@ jobs:
         ports:
           - 80:8080
 
+
+
     steps:
       - uses: actions/checkout@v2
+      - name: Get Changed Files
+        id: get_changed
+        run: |
+          COMMIT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          
+          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r $COMMIT_SHA)
+          
+          CHANGED_FILES_WITH_EXTENSIONS=$(echo "$CHANGED_FILES" | xargs -I {} basename {})
+          
+          echo "::set-output name=changed_files::$CHANGED_FILES_WITH_EXTENSIONS"
+
       - name: Validate OpenAPI definition
         uses: char0n/swagger-editor-validate@v1
         with:
           swagger-editor-url: http://localhost/
-          entrypoint: /**/*.yaml
+          definition-file: CHANGED_FILES_WITH_EXTENSIONS
